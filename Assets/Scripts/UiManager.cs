@@ -4,10 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class UiManager : MonoBehaviour
 {
+    [Header("Buttons")]
     [SerializeField] private Button _startButton;
     [SerializeField] private Button _settingsButton;
-    [SerializeField] private Animator _settingsAnimator;
     [SerializeField] private Button _topScoreButton;
+    [Header("Animators")]
+    [SerializeField] private Animator _settingsAnimator;
     [SerializeField] private Animator _topScoreAnimator;
     void Start()
     {
