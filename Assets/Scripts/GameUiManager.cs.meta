@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/GameUiManager.cs.meta
 guid: 270993a7f4fde3b4388ad6e5a23b6fb5
+========
+guid: 6408d0ff7ecd68f448d252b4dd71e8ce
+>>>>>>>> Liubov:Assets/Scripts/UiManager.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

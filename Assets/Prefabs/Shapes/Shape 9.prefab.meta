@@ -1,8 +1,14 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/Shapes/Shape 9.prefab.meta
 guid: 735baf28a5731e145ac99994323a0b56
 timeCreated: 1474376636
 licenseType: Store
 NativeFormatImporter:
+========
+guid: f2d0cff2bd7256d42b6958300bb934ed
+PrefabImporter:
+  externalObjects: {}
+>>>>>>>> Liubov:Assets/Prefabs/Shapes/Shape 8.prefab.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 

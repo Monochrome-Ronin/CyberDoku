@@ -41,7 +41,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4000012915337658}
   m_Layer: 0
+<<<<<<<< HEAD:Assets/Prefabs/Shapes/Shape 10.prefab
   m_Name: Shape 10
+========
+  m_Name: Shape 8
+>>>>>>>> Liubov:Assets/Prefabs/Shapes/Shape 8.prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
