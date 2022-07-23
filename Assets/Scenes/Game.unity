@@ -5967,8 +5967,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shapes:
-  - {fileID: 1000010743416826, guid: d461fbf45f28e0d49896dfd2d96d58b2, type: 3}
-  - {fileID: 1000010743416826, guid: e9f739fc02943a44396d42f361b8d553, type: 3}
+  - {fileID: 1000013607061508, guid: ae8735a2679d5e54a96527dba72d7e7c, type: 3}
+  - {fileID: 1000010848202762, guid: 729e4b2c0850cc54b9c6fba0a25848ae, type: 3}
+  - {fileID: 1000010735536160, guid: 69cc9c71b857276459ceff37c92942d6, type: 3}
+  - {fileID: 1000010735536160, guid: b474545747b7ef343ac27bc6d08f51bc, type: 3}
+  - {fileID: 1000010743416826, guid: 57d66b98a6a3afc49ad09a26a46a308e, type: 3}
+  - {fileID: 1000011639141054, guid: ae3704b794839484ebf71fb740ee5118, type: 3}
+  - {fileID: 1000013774893932, guid: 6fcad3c337e541049b7278093a7d96ed, type: 3}
+  - {fileID: 1000013774893932, guid: f9d8b19841c38214a9ada10cee59b447, type: 3}
+  - {fileID: 1000013836595148, guid: 735baf28a5731e145ac99994323a0b56, type: 3}
+  - {fileID: 1000013836595148, guid: 683ca9f8c63e8b843a066f894026028c, type: 3}
+  - {fileID: 1000010743416826, guid: 720066828d0779f46a32395b55b2dbaa, type: 3}
+  - {fileID: 1000010743416826, guid: df251178f06ca2342bf4fa88b5fe5853, type: 3}
   spawnPositions:
   - {fileID: 619120256}
   - {fileID: 1707040167}
