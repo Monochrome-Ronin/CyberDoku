@@ -5,7 +5,7 @@ using UnityEngine;
 public class CellChecker : MonoBehaviour
 {
     Transform _transform;
-    [SerializeField]
+    
     void Start()
     {
         _transform = GetComponent<Transform>();
