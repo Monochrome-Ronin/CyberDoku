@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CellChecker : MonoBehaviour
 {
     Transform _transform;
+    GameObject CurrentCell;
     
     void Start()
     {
@@ -18,8 +20,23 @@ public class CellChecker : MonoBehaviour
         {
             if (hit.collider.tag == "cell")
             {
-                print(hit.collider.name);
+                if(CurrentCell == null)
+                {
+                    CurrentCell = hit.transform.gameObject;
+                }
+                if (CurrentCell != hit.transform.gameObject)
+                {
+                    CurrentCell.GetComponent<Highlighter>().Unhighlight();
+                }
+                CurrentCell = hit.transform.gameObject;
+                CurrentCell.GetComponent<Highlighter>().Highlight();
             }
+            
+        }
+        else if (CurrentCell != null)
+        {
+            CurrentCell.GetComponent<Highlighter>().Unhighlight();
+            CurrentCell = null;
         }
     }
 }

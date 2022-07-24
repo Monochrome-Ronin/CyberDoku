@@ -33,7 +33,17 @@ public class MoveShape : MonoBehaviour
                     offset = hit.transform.parent.transform.position - mousePosition;
                     Clicked = true;
                     CurrentHit = hit;
-                    hit.collider.enabled = false;
+                    foreach (Transform child in CurrentHit.transform.parent.GetComponentsInChildren<Transform>())
+                    {
+                        try
+                        {
+                            child.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                        }
+                        catch
+                        {
+                            continue;
+                        }
+                    }
                 }
             }           
         }
@@ -47,7 +57,17 @@ public class MoveShape : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             Clicked = false;
-            CurrentHit.collider.enabled = true;
+            foreach (Transform child in CurrentHit.transform.parent.GetComponentsInChildren<Transform>())
+            {
+                try
+                {
+                    child.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                }
+                catch
+                {
+                    continue;
+                }
+            }
         }
     }
 }
