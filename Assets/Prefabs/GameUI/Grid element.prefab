@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 8709326471282213328}
   - component: {fileID: 369981355734388888}
   - component: {fileID: 2858105077319987720}
+  - component: {fileID: 4743777841807795277}
+  - component: {fileID: -5416225245740556169}
   m_Layer: 5
   m_Name: Grid element
-  m_TagString: Untagged
+  m_TagString: cell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,3 +78,43 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.8
+--- !u!61 &4743777841807795277
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2956246822460966284}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 118, y: 118}
+  m_EdgeRadius: 0
+--- !u!114 &-5416225245740556169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2956246822460966284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e24577337d9d4042ae372c5b7de32ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Highlighted: {fileID: 2100000, guid: bbd17fabff3791c438ad14b791b40b4a, type: 2}
+  _Unhighlighted: {fileID: 2100000, guid: 4c398844e37f09b4b9ae47ae26853ba1, type: 2}
