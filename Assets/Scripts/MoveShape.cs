@@ -57,15 +57,18 @@ public class MoveShape : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             Clicked = false;
-            foreach (Transform child in CurrentHit.transform.parent.GetComponentsInChildren<Transform>())
+            if(CurrentHit.collider != null)
             {
-                try
+                foreach (Transform child in CurrentHit.transform.parent.GetComponentsInChildren<Transform>())
                 {
-                    child.gameObject.GetComponent<BoxCollider2D>().enabled = true;
-                }
-                catch
-                {
-                    continue;
+                    try
+                    {
+                        child.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                    }
+                    catch
+                    {
+                        continue;
+                    }
                 }
             }
         }
