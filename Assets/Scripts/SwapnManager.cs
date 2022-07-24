@@ -6,7 +6,6 @@ public class SwapnManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] shapes;
     [SerializeField] private GameObject[] spawnPositions;
-
     private int shapeCount;
     void Start()
     {
