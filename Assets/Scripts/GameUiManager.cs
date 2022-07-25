@@ -4,16 +4,40 @@ using UnityEngine.SceneManagement;
 
 public class GameUiManager : MonoBehaviour
 {
+    [Header("Buttons")]
     [SerializeField] private Button _backButton;
     [SerializeField] private Button _settingsButtonGame;
-    [SerializeField] private Animator _settingsAnimatorGame;
     [SerializeField] private Button _topScoreButtonGame;
+
+    [Header("Animators")]
+    [SerializeField] private Animator _settingsAnimatorGame;
     [SerializeField] private Animator _topScoreAnimatorGame;
+
+    [Header("Music")]
+    [SerializeField] private Toggle _musicToggle;
+    private bool isMuted;
+    private AudioSource _audioSource;
     void Start()
     {
         _settingsButtonGame.onClick.AddListener(openOrCloseMenuGame);
         _topScoreButtonGame.onClick.AddListener(openOrCloseScoreGame);
         _backButton.onClick.AddListener(backToMenu);
+
+        _audioSource = gameObject.GetComponent<AudioSource>();
+        _musicToggle.onValueChanged.AddListener(this.offOnMusic);
+
+        if(!PlayerPrefs.HasKey("Muted")){
+            Debug.Log("Ключа нету");
+            PlayerPrefs.SetInt("Muted", 1);
+            isMuted = PlayerPrefs.GetInt("Muted") == 1;
+            _audioSource.mute = isMuted;
+            _musicToggle.isOn = isMuted;
+        }else{
+            Debug.Log("Ключ есть " + PlayerPrefs.GetInt("Muted"));
+            isMuted = PlayerPrefs.GetInt("Muted") == 1;
+            _audioSource.mute = isMuted;
+            _musicToggle.isOn = isMuted;
+        }
     }
 
     private void openOrCloseScoreGame()
@@ -37,6 +61,13 @@ public class GameUiManager : MonoBehaviour
         {
             _settingsAnimatorGame.SetBool("isOpen", false);
         }
+    }
+
+    private void offOnMusic(bool isOn)
+    {
+        isMuted = isOn;
+        _audioSource.mute = isMuted;
+        PlayerPrefs.SetInt("Muted", isMuted ? 1 : 0);
     }
 
     private void backToMenu()
