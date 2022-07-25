@@ -27,13 +27,11 @@ public class GameUiManager : MonoBehaviour
         _musicToggle.onValueChanged.AddListener(this.offOnMusic);
 
         if(!PlayerPrefs.HasKey("Muted")){
-            Debug.Log("Ключа нету");
             PlayerPrefs.SetInt("Muted", 1);
             isMuted = PlayerPrefs.GetInt("Muted") == 1;
             _audioSource.mute = isMuted;
             _musicToggle.isOn = isMuted;
         }else{
-            Debug.Log("Ключ есть " + PlayerPrefs.GetInt("Muted"));
             isMuted = PlayerPrefs.GetInt("Muted") == 1;
             _audioSource.mute = isMuted;
             _musicToggle.isOn = isMuted;
