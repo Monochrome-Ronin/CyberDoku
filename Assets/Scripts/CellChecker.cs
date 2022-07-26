@@ -48,6 +48,7 @@ public class CellChecker : MonoBehaviour
         {
             _transform.position = CurrentCell.transform.position;
             CurrentCell.transform.GetComponent<Highlighter>().Occupied = true;
+            CurrentCell.transform.GetComponent<Highlighter>().Cube = _transform.gameObject;
             Placed = true;
         }
     }

@@ -9,7 +9,9 @@ public class Highlighter : MonoBehaviour
     Material _Highlighted;
     [SerializeField]
     Material _Unhighlighted;
+
     public bool Occupied = false;
+    public GameObject Cube;
 
     public void Highlight()
     {
