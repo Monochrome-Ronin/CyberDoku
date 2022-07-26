@@ -39,4 +39,18 @@ public class CellChecker : MonoBehaviour
             CurrentCell = null;
         }
     }
+
+    public void FixToCell()
+    {
+        if(CurrentCell != null)
+        {
+            _transform.position = CurrentCell.transform.position;
+            CurrentCell.transform.GetComponent<Highlighter>().Occupied = true;
+        }
+    }
+
+    public bool IsOccupied()
+    {
+        return CurrentCell.transform.GetComponent<Highlighter>().Occupied;
+    }
 }
