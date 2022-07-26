@@ -33,17 +33,7 @@ public class MoveShape : MonoBehaviour
                     offset = hit.transform.parent.transform.position - mousePosition;
                     Clicked = true;
                     CurrentHit = hit;
-                    foreach (Transform child in CurrentHit.transform.parent.GetComponentsInChildren<Transform>())
-                    {
-                        try
-                        {
-                            child.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                        }
-                        catch
-                        {
-                            continue;
-                        }
-                    }
+                    EnebleCollider(false);
                 }
             }           
         }
@@ -60,17 +50,8 @@ public class MoveShape : MonoBehaviour
             if(CurrentHit.collider != null)
             {
                 FixCubes(CurrentHit);
-                foreach (Transform child in CurrentHit.transform.parent.GetComponentsInChildren<Transform>())
-                {
-                    try
-                    {
-                        child.gameObject.GetComponent<BoxCollider2D>().enabled = true;
-                    }
-                    catch
-                    {
-                        continue;
-                    }
-                }
+                if(!IsPlaced(CurrentHit))
+                    EnebleCollider(true);
             }
 
         }
@@ -110,5 +91,25 @@ public class MoveShape : MonoBehaviour
                 continue;
             }
         }
+    }
+
+    void EnebleCollider(bool eneble)
+    {
+        foreach (Transform child in CurrentHit.transform.parent.GetComponentsInChildren<Transform>())
+        {
+            try
+            {
+                child.gameObject.GetComponent<BoxCollider2D>().enabled = eneble;
+            }
+            catch
+            {
+                continue;
+            }
+        }
+    }
+
+    bool IsPlaced(RaycastHit2D hit)
+    {
+        return hit.transform.GetComponent<CellChecker>().Placed;
     }
 }

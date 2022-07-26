@@ -8,6 +8,8 @@ public class CellChecker : MonoBehaviour
     Transform _transform;
     GameObject CurrentCell;
     
+    public bool Placed = false;
+    
     void Start()
     {
         _transform = GetComponent<Transform>();
@@ -46,6 +48,7 @@ public class CellChecker : MonoBehaviour
         {
             _transform.position = CurrentCell.transform.position;
             CurrentCell.transform.GetComponent<Highlighter>().Occupied = true;
+            Placed = true;
         }
     }
 
