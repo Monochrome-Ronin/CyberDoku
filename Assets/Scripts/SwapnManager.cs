@@ -10,14 +10,13 @@ public class SwapnManager : MonoBehaviour
     void Start()
     {
         SpawnShape();
-        shapeCount = 3;
     }
 
     void Update()
     {
         if (shapeCount < 1) SpawnShape();
     }
-    //Для Респавна трёх фигур в метод уничтожения фигуры вставить shapeCount--
+    //пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ shapeCount--
     private void SpawnShape() 
     {
         for(int spawnIndex = 0; spawnIndex < 3; spawnIndex++)
