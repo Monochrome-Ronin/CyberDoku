@@ -1,13 +1,15 @@
 using UnityEngine;
+using System.Collections;
 
 public class BoardManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject _Panel;
+    private GameObject _Panel;
 
     [SerializeField]
     Transform[,] MatrixGrid = new Transform[9,9];
 
+    Quaternion _rotateTo;
     void Start()
     {
         Transform[] GridElements = _Panel.transform.GetComponentsInChildren<Transform>();
@@ -90,24 +92,28 @@ public class BoardManager : MonoBehaviour
 
     void DeleteRows(int[] rows)
     {
+        _rotateTo = Quaternion.Euler(0,0,0);
         for(int i = 0; i < rows.Length; i++)
         {
             for(int x = 0; x < 9; x++)
             {
-                Destroy(MatrixGrid[rows[i], x].GetComponent<Highlighter>().Cube);
-                MatrixGrid[rows[i], x].GetComponent<Highlighter>().Occupied = false;
-                MatrixGrid[rows[i], x].GetComponent<Highlighter>().Cube = null;
-                MatrixGrid[rows[i], x].GetComponent<Highlighter>().Unhighlight();
+                MatrixGrid[rows[i], x].GetComponent<Highlighter>().Cube.transform.rotation = Quaternion.Slerp(MatrixGrid[rows[i], x].GetComponent<Highlighter>().Cube.transform.rotation, _rotateTo, Time.deltaTime * 3f);
+                //Destroy(MatrixGrid[rows[i], x].GetComponent<Highlighter>().Cube);
+                //MatrixGrid[rows[i], x].GetComponent<Highlighter>().Occupied = false;
+                //MatrixGrid[rows[i], x].GetComponent<Highlighter>().Cube = null;
+                //MatrixGrid[rows[i], x].GetComponent<Highlighter>().Unhighlight();
             }
         }
     }
 
     void DeleteColumns(int[] columns)
     {
+        _rotateTo = Quaternion.Euler(0.5f,0.5f,0.5f);
         for (int i = 0; i < columns.Length; i++)
         {
             for (int y = 0; y < 9; y++)
             {
+                MatrixGrid[y, columns[i]].GetComponent<Highlighter>().Cube.transform.rotation = Quaternion.Slerp(MatrixGrid[y, columns[i]].GetComponent<Highlighter>().Cube.transform.rotation, _rotateTo, Time.deltaTime * 3f);
                 Destroy(MatrixGrid[y, columns[i]].GetComponent<Highlighter>().Cube);
                 MatrixGrid[y, columns[i]].GetComponent<Highlighter>().Occupied = false;
                 MatrixGrid[y, columns[i]].GetComponent<Highlighter>().Cube = null;
