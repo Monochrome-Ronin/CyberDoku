@@ -13,7 +13,6 @@ public class MoveShape : MonoBehaviour
     Vector3 mousePosition;
     private AudioSource _audioSource;
     [SerializeField] private AudioClip[] audioClips;
-    private int musicIndex = 0;
 
     void Start()
     {
@@ -37,7 +36,7 @@ public class MoveShape : MonoBehaviour
                     Clicked = true;
                     CurrentHit = hit;
                     EnebleCollider(false);
-                    _audioSource.PlayOneShot(audioClips[1]);
+                  //  _audioSource.PlayOneShot(audioClips[1]);
                 }
             }           
         }
@@ -50,7 +49,7 @@ public class MoveShape : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
-            _audioSource.PlayOneShot(audioClips[0]);
+           // _audioSource.PlayOneShot(audioClips[0]);
             Clicked = false;
             if(CurrentHit.collider != null)
             {
