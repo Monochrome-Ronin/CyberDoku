@@ -7,11 +7,13 @@ public class GameMusic : MonoBehaviour
     [SerializeField] private AudioClip[] audioClips;
     private AudioSource _audioSource;
     private int _trackDelay = 0;
+    private UiManager uiManager;
 
     private void Awake()
     {
         _audioSource = gameObject.GetComponent<AudioSource>();
         StartCoroutine(MusicPlay());
+        uiManager = GetComponent<UiManager>();
     }
     private void Update()
     {
@@ -31,9 +33,15 @@ public class GameMusic : MonoBehaviour
             }
 
             yield return new WaitForSeconds(waitTime);
-        }
-      
-           
+        }           
         
+    }
+
+    private void StopMusic()
+    {
+       if(uiManager.isMuted == true)
+       {
+            _audioSource.Pause();
+       }
     }
 }

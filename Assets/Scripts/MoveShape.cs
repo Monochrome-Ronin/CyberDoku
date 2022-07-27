@@ -11,10 +11,14 @@ public class MoveShape : MonoBehaviour
     bool Clicked = false;
     Vector3 offset = new Vector3();
     Vector3 mousePosition;
+    private AudioSource _audioSource;
+    [SerializeField] private AudioClip[] audioClips;
+    private int musicIndex = 0;
 
     void Start()
     {
         SellSize = _SellCollider.size.x;
+        _audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     void Update()
@@ -27,13 +31,13 @@ public class MoveShape : MonoBehaviour
             if (hit.collider != null)
             {
                 if (hit.transform.tag == "shape")
-                {
+                {                 
                     __ChangeScale(hit);
-
                     offset = hit.transform.parent.transform.position - mousePosition;
                     Clicked = true;
                     CurrentHit = hit;
                     EnebleCollider(false);
+                    _audioSource.PlayOneShot(audioClips[1]);
                 }
             }           
         }
@@ -46,6 +50,7 @@ public class MoveShape : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
+            _audioSource.PlayOneShot(audioClips[0]);
             Clicked = false;
             if(CurrentHit.collider != null)
             {
