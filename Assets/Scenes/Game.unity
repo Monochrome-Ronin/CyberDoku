@@ -6052,6 +6052,7 @@ MonoBehaviour:
   - {fileID: 619120256}
   - {fileID: 1707040167}
   - {fileID: 941850434}
+  shapeCount: 0
 --- !u!114 &1147552496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6173,9 +6174,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fe6da654f2c57b4e88ae00cc9d06534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClips:
-  - {fileID: 8300000, guid: 660fa0f220c2aa84fbdbda197b5fe6fe, type: 3}
-  - {fileID: 8300000, guid: f7df15ce9a2290e46ae37e04f5ce5a3c, type: 3}
 --- !u!1001 &1156473191
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6745,7 +6743,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1349339825
 PrefabInstance:
@@ -10425,6 +10423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _SellCollider: {fileID: 4743777841807795277, guid: 1a3f794557b7af946ad34c5392785206, type: 3}
+  _SwapnManager: {fileID: 1147552495}
 --- !u!4 &1951862595
 Transform:
   m_ObjectHideFlags: 0
