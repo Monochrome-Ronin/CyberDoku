@@ -15,7 +15,7 @@ public class UiManager : MonoBehaviour
 
     [Header("Music")]
     private AudioSource _audioSource;
-    public bool isMuted {get; private set;}
+    private bool isMuted;
     [SerializeField] private Toggle _musicToggle;
 
     void Start()
@@ -69,6 +69,8 @@ public class UiManager : MonoBehaviour
         isMuted = isOn;
         _audioSource.mute = isMuted;
         PlayerPrefs.SetInt("Muted", isMuted ? 1 : 0);
+        
+        
     }
 
     private void startGame()

@@ -32,6 +32,10 @@ public class Settings : MonoBehaviour
         isMuted = isOn;
         _audioSource.mute = isMuted;
         PlayerPrefs.SetInt("Muted", isMuted ? 1 : 0);
+        //if (isMuted == true)
+        //{
+        //    _audioSource.Pause();
+        //}
     }
 
     private void SwapMusic(int musicIndex){
@@ -40,5 +44,6 @@ public class Settings : MonoBehaviour
         if(_musicDropDown.value == 2) musicIndex = 2;
         _audioSource.clip = _audioClips[musicIndex];
         _audioSource.Play();
+       
     }
 }

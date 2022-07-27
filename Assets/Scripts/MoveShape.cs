@@ -30,13 +30,14 @@ public class MoveShape : MonoBehaviour
             if (hit.collider != null)
             {
                 if (hit.transform.tag == "shape")
-                {                 
+                {    
+                    _audioSource.PlayOneShot(audioClips[1]);             
                     __ChangeScale(hit);
                     offset = hit.transform.parent.transform.position - mousePosition;
                     Clicked = true;
                     CurrentHit = hit;
                     EnebleCollider(false);
-                  //  _audioSource.PlayOneShot(audioClips[1]);
+                   
                 }
             }           
         }
@@ -49,13 +50,14 @@ public class MoveShape : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
-           // _audioSource.PlayOneShot(audioClips[0]);
+           _audioSource.PlayOneShot(audioClips[0]);
             Clicked = false;
             if(CurrentHit.collider != null)
             {
                 FixCubes(CurrentHit);
                 if(!IsPlaced(CurrentHit))
                     EnebleCollider(true);
+                
             }
 
         }
