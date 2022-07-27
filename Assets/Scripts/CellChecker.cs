@@ -7,7 +7,7 @@ public class CellChecker : MonoBehaviour
 {
     Transform _transform;
     GameObject CurrentCell;
-    
+
     public bool Placed = false;
     
     void Start()
@@ -56,5 +56,15 @@ public class CellChecker : MonoBehaviour
     public bool IsOccupied()
     {
         return CurrentCell.transform.GetComponent<Highlighter>().Occupied;
+    }
+
+    public bool HaveCell()
+    {
+        return CurrentCell != null;
+    }
+
+    public void UnHighlightCell()
+    {
+        CurrentCell.GetComponent<Highlighter>().Unhighlight();
     }
 }
