@@ -8,6 +8,8 @@ public class CellChecker : MonoBehaviour
     Transform _transform;
     GameObject CurrentCell;
     
+    public bool Placed = false;
+    
     void Start()
     {
         _transform = GetComponent<Transform>();
@@ -38,5 +40,21 @@ public class CellChecker : MonoBehaviour
             CurrentCell.GetComponent<Highlighter>().Unhighlight();
             CurrentCell = null;
         }
+    }
+
+    public void FixToCell()
+    {
+        if(CurrentCell != null)
+        {
+            _transform.position = CurrentCell.transform.position;
+            CurrentCell.transform.GetComponent<Highlighter>().Occupied = true;
+            CurrentCell.transform.GetComponent<Highlighter>().Cube = _transform.gameObject;
+            Placed = true;
+        }
+    }
+
+    public bool IsOccupied()
+    {
+        return CurrentCell.transform.GetComponent<Highlighter>().Occupied;
     }
 }

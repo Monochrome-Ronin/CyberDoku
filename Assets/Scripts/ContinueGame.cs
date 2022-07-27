@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class ContinueGame : MonoBehaviour
 {
-   private int currentScore;
   
-
+  
 
 }

@@ -9,7 +9,6 @@ public class MoveShape : MonoBehaviour
     float SellSize;
     RaycastHit2D CurrentHit;
     bool Clicked = false;
-    Vector3 startPosition = new Vector3();
     Vector3 offset = new Vector3();
     Vector3 mousePosition;
 
@@ -29,21 +28,12 @@ public class MoveShape : MonoBehaviour
             {
                 if (hit.transform.tag == "shape")
                 {
-                    startPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    __ChangeScale(hit);
+
                     offset = hit.transform.parent.transform.position - mousePosition;
                     Clicked = true;
                     CurrentHit = hit;
-                    foreach (Transform child in CurrentHit.transform.parent.GetComponentsInChildren<Transform>())
-                    {
-                        try
-                        {
-                            child.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                        }
-                        catch
-                        {
-                            continue;
-                        }
-                    }
+                    EnebleCollider(false);
                 }
             }           
         }
@@ -59,18 +49,67 @@ public class MoveShape : MonoBehaviour
             Clicked = false;
             if(CurrentHit.collider != null)
             {
-                foreach (Transform child in CurrentHit.transform.parent.GetComponentsInChildren<Transform>())
-                {
-                    try
-                    {
-                        child.gameObject.GetComponent<BoxCollider2D>().enabled = true;
-                    }
-                    catch
-                    {
-                        continue;
-                    }
-                }
+                FixCubes(CurrentHit);
+                if(!IsPlaced(CurrentHit))
+                    EnebleCollider(true);
+            }
+
+        }
+    }
+
+    void __ChangeScale(RaycastHit2D hit)
+    {
+        hit.transform.parent.transform.localScale = new Vector3(.61f, .61f, 1);
+    }
+
+    void FixCubes(RaycastHit2D hit)
+    {
+        bool _isOccupied = false;
+        foreach (Transform child in hit.transform.parent.GetComponentsInChildren<Transform>())
+        {
+
+            try
+            {
+                _isOccupied |= child.gameObject.GetComponent<CellChecker>().IsOccupied();
+            }
+            catch
+            {
+                continue;
             }
         }
+
+        foreach (Transform child in hit.transform.parent.GetComponentsInChildren<Transform>())
+        {
+
+            try
+            {
+                if(!_isOccupied)
+                    child.gameObject.GetComponent<CellChecker>().FixToCell();
+            }
+            catch
+            {
+                continue;
+            }
+        }
+    }
+
+    void EnebleCollider(bool eneble)
+    {
+        foreach (Transform child in CurrentHit.transform.parent.GetComponentsInChildren<Transform>())
+        {
+            try
+            {
+                child.gameObject.GetComponent<BoxCollider2D>().enabled = eneble;
+            }
+            catch
+            {
+                continue;
+            }
+        }
+    }
+
+    bool IsPlaced(RaycastHit2D hit)
+    {
+        return hit.transform.GetComponent<CellChecker>().Placed;
     }
 }

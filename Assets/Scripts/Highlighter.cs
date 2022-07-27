@@ -10,6 +10,9 @@ public class Highlighter : MonoBehaviour
     [SerializeField]
     Material _Unhighlighted;
 
+    public bool Occupied = false;
+    public GameObject Cube;
+
     public void Highlight()
     {
         GetComponent<Image>().material = _Highlighted;
