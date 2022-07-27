@@ -6,15 +6,22 @@ public class MoveShape : MonoBehaviour
 {
     [SerializeField]
     BoxCollider2D _SellCollider;
-    float SellSize;
+    [SerializeField]
+    SwapnManager _SwapnManager;
+
     RaycastHit2D CurrentHit;
     bool Clicked = false;
     Vector3 offset = new Vector3();
     Vector3 mousePosition;
+    Vector3 startShapePosition;
+
+    Coroutine CurrentCoroutine;
+    readonly float LerpSpeed = 20f;
+    float t = 0;
 
     void Start()
     {
-        SellSize = _SellCollider.size.x;
+        
     }
 
     void Update()
@@ -28,8 +35,8 @@ public class MoveShape : MonoBehaviour
             {
                 if (hit.transform.tag == "shape")
                 {
+                    startShapePosition = hit.transform.parent.transform.position;
                     __ChangeScale(hit);
-
                     offset = hit.transform.parent.transform.position - mousePosition;
                     Clicked = true;
                     CurrentHit = hit;
@@ -51,7 +58,11 @@ public class MoveShape : MonoBehaviour
             {
                 FixCubes(CurrentHit);
                 if(!IsPlaced(CurrentHit))
+                {
+                    __ReturnScale(CurrentHit);
                     EnebleCollider(true);
+                    CurrentCoroutine = StartCoroutine(ShapeReturn(startShapePosition, CurrentHit.transform.parent.transform.position));
+                }
             }
 
         }
@@ -62,15 +73,21 @@ public class MoveShape : MonoBehaviour
         hit.transform.parent.transform.localScale = new Vector3(.61f, .61f, 1);
     }
 
+    void __ReturnScale(RaycastHit2D hit)
+    {
+        hit.transform.parent.transform.localScale = new Vector3(.4f, .4f, 1);
+    }
+
     void FixCubes(RaycastHit2D hit)
     {
         bool _isOccupied = false;
+        bool _haveCells = true;
         foreach (Transform child in hit.transform.parent.GetComponentsInChildren<Transform>())
         {
 
             try
             {
-                _isOccupied |= child.gameObject.GetComponent<CellChecker>().IsOccupied();
+                _haveCells &= child.gameObject.GetComponent<CellChecker>().HaveCell();
             }
             catch
             {
@@ -78,19 +95,55 @@ public class MoveShape : MonoBehaviour
             }
         }
 
-        foreach (Transform child in hit.transform.parent.GetComponentsInChildren<Transform>())
+        if (_haveCells)
         {
-
-            try
+            foreach (Transform child in hit.transform.parent.GetComponentsInChildren<Transform>())
             {
-                if(!_isOccupied)
+
+                try
+                {
+                    _isOccupied |= child.gameObject.GetComponent<CellChecker>().IsOccupied();
+                }
+                catch
+                {
+                    continue;
+                }
+            }
+        }
+
+        if (!_isOccupied && _haveCells)
+        {
+            foreach (Transform child in hit.transform.parent.GetComponentsInChildren<Transform>())
+            {
+
+                try
+                {
                     child.gameObject.GetComponent<CellChecker>().FixToCell();
+                }
+                catch
+                {
+                    continue;
+                }
             }
-            catch
+            //shapeCount--(SwapnManager)
+            _SwapnManager.shapeCount -= 1;
+        }
+        else
+        {
+            foreach (Transform child in hit.transform.parent.GetComponentsInChildren<Transform>())
             {
-                continue;
+
+                try
+                {
+                    child.gameObject.GetComponent<CellChecker>().UnHighlightCell();
+                }
+                catch
+                {
+                    continue;
+                }
             }
         }
+        
     }
 
     void EnebleCollider(bool eneble)
@@ -111,5 +164,20 @@ public class MoveShape : MonoBehaviour
     bool IsPlaced(RaycastHit2D hit)
     {
         return hit.transform.GetComponent<CellChecker>().Placed;
+    }
+
+    IEnumerator ShapeReturn(Vector3 startPos, Vector3 currentPos)
+    {
+        while (true)
+        {
+            t += Time.deltaTime * LerpSpeed;
+            CurrentHit.transform.parent.transform.position = Vector3.Lerp(currentPos, startPos, t);
+            if (t >= 1)
+            {
+                StopCoroutine(CurrentCoroutine);
+                t = 0;
+            }
+            yield return new WaitForSeconds(0.01f);
+        }
     }
 }
