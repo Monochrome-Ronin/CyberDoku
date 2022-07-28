@@ -35,6 +35,7 @@ public class MoveShape : MonoBehaviour
             {
                 if (hit.transform.tag == "shape")
                 {
+                    //
                     startShapePosition = hit.transform.parent.transform.position;
                     __ChangeScale(hit);
                     offset = hit.transform.parent.transform.position - mousePosition;
@@ -56,6 +57,7 @@ public class MoveShape : MonoBehaviour
             Clicked = false;
             if(CurrentHit.collider != null)
             {
+                //
                 FixCubes(CurrentHit);
                 if(!IsPlaced(CurrentHit))
                 {
