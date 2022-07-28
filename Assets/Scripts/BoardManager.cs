@@ -9,6 +9,9 @@ public class BoardManager : MonoBehaviour
     [SerializeField]
     Transform[,] MatrixGrid = new Transform[9,9];
 
+    [SerializeField]
+    Transform[,,,] MatrixSquareGrid = new Transform[3, 3, 3, 3];
+
     Quaternion _rotateTo;
     void Start()
     {
@@ -22,12 +25,28 @@ public class BoardManager : MonoBehaviour
                 count++;
             }
         }
+        count = 1;
+        for (int y = 0; y < 3; y++)
+        {
+            for (int x = 0; x < 3; x++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        MatrixSquareGrid[j, y, x, i] = GridElements[count];
+                        count++;
+                    }
+                }
+            }
+        }
     }
 
     void Update()
     {
         RotateRow(CheckRows());
         RotateColumns(CheckColumns());
+        RotateSquare(CheckSquare());
     }
 
     int[] CheckRows()
@@ -90,6 +109,49 @@ public class BoardManager : MonoBehaviour
         return result;
     }
 
+    Vector2[] CheckSquare()
+    {
+        bool[,] OccupiedSquare = new bool[3, 3];
+        for (int y = 0; y < 3; y++)
+        {
+            for (int x = 0; x < 3; x++)
+            {
+                bool Occupied = true;
+                for (int j = 0; j < 3; j++)
+                {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        Occupied &= MatrixSquareGrid[y, x, j, i].GetComponent<Highlighter>().Occupied;
+                    }
+                }
+                OccupiedSquare[y, x] = Occupied;
+            }
+        }
+        int count = 0;
+        for (int y = 0; y < 3; y++)
+        {
+            for (int x = 0; x < 3; x++)
+            {
+                if (OccupiedSquare[y, x])
+                    count++;
+            }
+        }
+        
+        Vector2[] result = new Vector2[count];
+        for (int y = 0; y < 3; y++)
+        {
+            for (int x = 0; x < 3; x++)
+            {
+                if (OccupiedSquare[y, x])
+                {
+                    result[count - 1] = new Vector2(y, x);
+                    count--;
+                }
+            }
+        }
+        return result;
+    }
+
     void DeleteRows(int[] rows)
     {
         for(int i = 0; i < rows.Length; i++)
@@ -146,5 +208,42 @@ public class BoardManager : MonoBehaviour
     }
     void DesroyingColumn(){
         DeleteColumns(CheckColumns());
+    }
+
+    void DeleteSquares(Vector2[] squares)
+    {
+        for (int i = 0; i < squares.Length; i++)
+        {
+            for (int y = 0; y < 3; y++)
+            {
+                for (int x = 0; x < 3; x++)
+                {
+                    Destroy(MatrixSquareGrid[(int)squares[i].x, (int)squares[i].y, y, x].GetComponent<Highlighter>().Cube);
+                    MatrixSquareGrid[(int)squares[i].x, (int)squares[i].y, y, x].GetComponent<Highlighter>().Occupied = false;
+                    MatrixSquareGrid[(int)squares[i].x, (int)squares[i].y, y, x].GetComponent<Highlighter>().Cube = null;
+                    MatrixSquareGrid[(int)squares[i].x, (int)squares[i].y, y, x].GetComponent<Highlighter>().Unhighlight();
+                }
+            }
+        }
+    }
+    void RotateSquare(Vector2[] squares)
+    {
+        _rotateTo = Quaternion.Euler(0, 0, 0);
+        for (int i = 0; i < squares.Length; i++)
+        {
+            for (int y = 0; y < 3; y++)
+            {
+                for (int x = 0; x < 3; x++)
+                {
+                    MatrixSquareGrid[(int)squares[i].x, (int)squares[i].y, y, x].GetComponent<Highlighter>().Cube.transform.rotation = Quaternion.Slerp(MatrixSquareGrid[(int)squares[i].x, (int)squares[i].y, y, x].GetComponent<Highlighter>().Cube.transform.rotation, _rotateTo, Time.deltaTime * 3f);
+                    Invoke("DesroyingSquare", 1f);
+                }
+            }
+        }
+    }
+
+    void DesroyingSquare()
+    {
+        DeleteSquares(CheckSquare());
     }
 }
