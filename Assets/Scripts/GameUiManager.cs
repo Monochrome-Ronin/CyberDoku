@@ -12,6 +12,7 @@ public class GameUiManager : MonoBehaviour
     [Header("Animators")]
     [SerializeField] private Animator _settingsAnimatorGame;
     [SerializeField] private Animator _topScoreAnimatorGame;
+    
     void Start()
     {
         _settingsButtonGame.onClick.AddListener(openOrCloseMenuGame);

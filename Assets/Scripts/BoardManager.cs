@@ -1,13 +1,15 @@
 using UnityEngine;
+using System.Collections;
 
 public class BoardManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject _Panel;
+    private GameObject _Panel;
 
     [SerializeField]
     Transform[,] MatrixGrid = new Transform[9,9];
 
+    Quaternion _rotateTo;
     void Start()
     {
         Transform[] GridElements = _Panel.transform.GetComponentsInChildren<Transform>();
@@ -24,8 +26,8 @@ public class BoardManager : MonoBehaviour
 
     void Update()
     {
-        DeleteRows(CheckRows());
-        DeleteColumns(CheckColumns());
+        RotateRow(CheckRows());
+        RotateColumns(CheckColumns());
     }
 
     int[] CheckRows()
@@ -101,6 +103,21 @@ public class BoardManager : MonoBehaviour
             }
         }
     }
+    void RotateRow(int[] rows)
+    {
+        _rotateTo = Quaternion.Euler(0,0,0);
+        for(int i = 0; i < rows.Length; i++)
+        {
+            for(int x = 0; x < 9; x++)
+            {
+                MatrixGrid[rows[i], x].GetComponent<Highlighter>().Cube.transform.rotation = Quaternion.Slerp(MatrixGrid[rows[i], x].GetComponent<Highlighter>().Cube.transform.rotation, _rotateTo, Time.deltaTime * 3f);
+                Invoke("DesroyingRow", 1f);
+            }
+        }
+    }
+    void DesroyingRow(){
+        DeleteRows(CheckRows());
+    }
 
     void DeleteColumns(int[] columns)
     {
@@ -114,5 +131,20 @@ public class BoardManager : MonoBehaviour
                 MatrixGrid[y, columns[i]].GetComponent<Highlighter>().Unhighlight();
             }
         }
+    }
+    void RotateColumns(int[] columns)
+    {
+        _rotateTo = Quaternion.Euler(0,0,0);
+        for (int i = 0; i < columns.Length; i++)
+        {
+            for (int y = 0; y < 9; y++)
+            {
+                MatrixGrid[y, columns[i]].GetComponent<Highlighter>().Cube.transform.rotation = Quaternion.Slerp(MatrixGrid[y, columns[i]].GetComponent<Highlighter>().Cube.transform.rotation, _rotateTo, Time.deltaTime * 3f);
+                Invoke("DesroyingColumn", 1f);
+            }
+        }
+    }
+    void DesroyingColumn(){
+        DeleteColumns(CheckColumns());
     }
 }
