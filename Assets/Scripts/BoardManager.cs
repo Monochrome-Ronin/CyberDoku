@@ -12,7 +12,13 @@ public class BoardManager : MonoBehaviour
     [SerializeField]
     Transform[,,,] MatrixSquareGrid = new Transform[3, 3, 3, 3];
 
+    [Header("Animation")]
     Quaternion _rotateTo;
+    [SerializeField] private Animator _Cube;
+    [SerializeField] private GameObject _laserParticle;
+    private GameObject _laserGameObject;
+    private bool fawfa = false;
+
     void Start()
     {
         Transform[] GridElements = _Panel.transform.GetComponentsInChildren<Transform>();
@@ -162,22 +168,32 @@ public class BoardManager : MonoBehaviour
                 MatrixGrid[rows[i], x].GetComponent<Highlighter>().Occupied = false;
                 MatrixGrid[rows[i], x].GetComponent<Highlighter>().Cube = null;
                 MatrixGrid[rows[i], x].GetComponent<Highlighter>().Unhighlight();
+                fawfa = false;
             }
         }
+        Destroy(_laserGameObject);
     }
     void RotateRow(int[] rows)
     {
-        _rotateTo = Quaternion.Euler(0,0,0);
+        _rotateTo = Quaternion.Euler(0,0,90);
         for(int i = 0; i < rows.Length; i++)
         {
             for(int x = 0; x < 9; x++)
             {
-                MatrixGrid[rows[i], x].GetComponent<Highlighter>().Cube.transform.rotation = Quaternion.Slerp(MatrixGrid[rows[i], x].GetComponent<Highlighter>().Cube.transform.rotation, _rotateTo, Time.deltaTime * 3f);
-                Invoke("DesroyingRow", 1f);
+                MatrixGrid[rows[i], x].GetComponent<Highlighter>().Cube.transform.rotation = Quaternion.Slerp(MatrixGrid[rows[i], x].GetComponent<Highlighter>().Cube.transform.rotation, _rotateTo, Time.deltaTime * 10f);
             }
+            if(!fawfa){
+               LaserHorizontal(MatrixGrid[rows[i],0].transform.position.y); 
+            }
+            Invoke("DestroyingRow", 2f);
         }
     }
-    void DesroyingRow(){
+
+    void LaserHorizontal(float y){
+            _laserGameObject = Instantiate(_laserParticle, new Vector3(-6, y, 1 ), Quaternion.Euler(0,0,0));
+            fawfa = true;
+    }
+    void DestroyingRow(){
         DeleteRows(CheckRows());
     }
 
@@ -191,8 +207,10 @@ public class BoardManager : MonoBehaviour
                 MatrixGrid[y, columns[i]].GetComponent<Highlighter>().Occupied = false;
                 MatrixGrid[y, columns[i]].GetComponent<Highlighter>().Cube = null;
                 MatrixGrid[y, columns[i]].GetComponent<Highlighter>().Unhighlight();
+                fawfa = false;
             }
         }
+        Destroy(_laserGameObject);
     }
     void RotateColumns(int[] columns)
     {
@@ -202,11 +220,21 @@ public class BoardManager : MonoBehaviour
             for (int y = 0; y < 9; y++)
             {
                 MatrixGrid[y, columns[i]].GetComponent<Highlighter>().Cube.transform.rotation = Quaternion.Slerp(MatrixGrid[y, columns[i]].GetComponent<Highlighter>().Cube.transform.rotation, _rotateTo, Time.deltaTime * 3f);
-                Invoke("DesroyingColumn", 1f);
             }
+            if(!fawfa){
+               LaserVertical(MatrixGrid[0,columns[i]].transform.position.x); 
+            }
+            Invoke("DestroyingColumn", 2f);
         }
     }
-    void DesroyingColumn(){
+
+    void LaserVertical(float x){
+        
+            _laserGameObject = Instantiate(_laserParticle, new Vector3(x, 5.5f, 1 ), Quaternion.Euler(0,0,-90));
+            fawfa = true;
+    }
+
+    void DestroyingColumn(){
         DeleteColumns(CheckColumns());
     }
 
@@ -246,4 +274,5 @@ public class BoardManager : MonoBehaviour
     {
         DeleteSquares(CheckSquare());
     }
+
 }
