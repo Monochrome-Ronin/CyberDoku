@@ -30,9 +30,11 @@ public class Settings : MonoBehaviour
 
         if(!PlayerPrefs.HasKey("MusicIndex")){
             PlayerPrefs.SetInt("MusicIndex", 0);
+            _musicDropDown.value = PlayerPrefs.GetInt("MusicIndex");
             _audioSource.clip = _audioClips[PlayerPrefs.GetInt("MusicIndex")];
             _audioSource.Play();
         }else{
+            _musicDropDown.value = PlayerPrefs.GetInt("MusicIndex");
             _audioSource.clip = _audioClips[PlayerPrefs.GetInt("MusicIndex")];
             _audioSource.Play();
         }
