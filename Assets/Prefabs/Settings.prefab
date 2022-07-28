@@ -2183,6 +2183,7 @@ GameObject:
   - component: {fileID: 8777812932273549599}
   - component: {fileID: 8777812932273549585}
   - component: {fileID: 8777812932273549598}
+  - component: {fileID: 1610984388}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -2249,6 +2250,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1610984388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8777812932273549596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c787b30c42530e4a8800b66eb11c8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _musicToggle: {fileID: 8777812932536085635}
+  _musicDropDown: {fileID: 1471137987}
+  _audioSource: {fileID: 0}
+  _audioClips:
+  - {fileID: 8300000, guid: 3177f3f472b310d42bee07ecabb9f899, type: 3}
+  - {fileID: 8300000, guid: 660fa0f220c2aa84fbdbda197b5fe6fe, type: 3}
+  - {fileID: 8300000, guid: f7df15ce9a2290e46ae37e04f5ce5a3c, type: 3}
 --- !u!1 &8777812932536085633
 GameObject:
   m_ObjectHideFlags: 0
