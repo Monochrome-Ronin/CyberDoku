@@ -37,11 +37,4 @@ public class GameMusic : MonoBehaviour
         
     }
 
-    //private void StopMusic()
-    //{
-    //   if(uiManager.isMuted == true)
-    //   {
-    //        _audioSource.Pause();
-    //   }
-    //}
 }

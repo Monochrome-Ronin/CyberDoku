@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class BoardManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class BoardManager : MonoBehaviour
     Quaternion _rotateTo;
     void Start()
     {
+       
         Transform[] GridElements = _Panel.transform.GetComponentsInChildren<Transform>();
         int count = 1;
         for(int y = 0; y < 9; y++)
@@ -47,6 +49,7 @@ public class BoardManager : MonoBehaviour
         RotateRow(CheckRows());
         RotateColumns(CheckColumns());
         RotateSquare(CheckSquare());
+      
     }
 
     int[] CheckRows()
@@ -177,8 +180,9 @@ public class BoardManager : MonoBehaviour
             }
         }
     }
-    void DesroyingRow(){
+     void DesroyingRow(){
         DeleteRows(CheckRows());
+        
     }
 
     void DeleteColumns(int[] columns)
@@ -242,7 +246,7 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    void DesroyingSquare()
+     void DesroyingSquare()
     {
         DeleteSquares(CheckSquare());
     }
