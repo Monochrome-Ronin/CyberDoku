@@ -7,6 +7,7 @@ public class Settings : MonoBehaviour
     private bool isMuted;
     [SerializeField] private Toggle _musicToggle;
     [SerializeField] private Dropdown _musicDropDown;
+    [SerializeField] private Slider _volumeSlider;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip[] _audioClips;
     // Start is called before the first frame update
@@ -14,6 +15,7 @@ public class Settings : MonoBehaviour
     {
         _musicToggle.onValueChanged.AddListener(this.OffOnMusic);
         _musicDropDown.onValueChanged.AddListener(SwapMusic);
+        _volumeSlider.onValueChanged.AddListener(VolumeChange);
 
         if(!PlayerPrefs.HasKey("Muted")){
             PlayerPrefs.SetInt("Muted", 1);
@@ -24,6 +26,25 @@ public class Settings : MonoBehaviour
             isMuted = PlayerPrefs.GetInt("Muted") == 1;
             _audioSource.mute = isMuted;
             _musicToggle.isOn = isMuted;
+        }
+
+        if(!PlayerPrefs.HasKey("MusicIndex")){
+            PlayerPrefs.SetInt("MusicIndex", 0);
+            _musicDropDown.value = PlayerPrefs.GetInt("MusicIndex");
+            _audioSource.clip = _audioClips[PlayerPrefs.GetInt("MusicIndex")];
+            _audioSource.Play();
+        }else{
+            _musicDropDown.value = PlayerPrefs.GetInt("MusicIndex");
+            _audioSource.clip = _audioClips[PlayerPrefs.GetInt("MusicIndex")];
+            _audioSource.Play();
+        }
+
+        if(!PlayerPrefs.HasKey("Volume")){
+            PlayerPrefs.SetFloat("Volume", 0.5f);
+            _audioSource.volume = PlayerPrefs.GetFloat("Volume");
+            _volumeSlider.value = PlayerPrefs.GetFloat("Volume");
+        }else{
+            _volumeSlider.value = PlayerPrefs.GetFloat("Volume");
         }
     }
 
@@ -40,5 +61,12 @@ public class Settings : MonoBehaviour
         if(_musicDropDown.value == 2) musicIndex = 2;
         _audioSource.clip = _audioClips[musicIndex];
         _audioSource.Play();
+        PlayerPrefs.SetInt("MusicIndex", musicIndex);
+    }
+
+    private void VolumeChange(float vol){
+        _audioSource.volume = _volumeSlider.value;
+        vol = _audioSource.volume;
+        PlayerPrefs.SetFloat("Volume", vol);
     }
 }
