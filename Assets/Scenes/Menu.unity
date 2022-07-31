@@ -175,6 +175,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &868711652 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8777812932536085635, guid: 32337e931a029994185dbdb0b1c910cd, type: 3}
+  m_PrefabInstance: {fileID: 8777812932501475001}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &889675487
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -657,6 +668,7 @@ MonoBehaviour:
   _topScoreButton: {fileID: 830587142}
   _settingsAnimator: {fileID: 86089185}
   _topScoreAnimator: {fileID: 178614679}
+  _musicToggle: {fileID: 868711652}
 --- !u!4 &1823317265
 Transform:
   m_ObjectHideFlags: 0

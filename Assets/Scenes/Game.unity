@@ -1896,6 +1896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Panel: {fileID: 1846620170}
+  scoreManager: {fileID: 1927463926}
 --- !u!4 &298446839
 Transform:
   m_ObjectHideFlags: 0

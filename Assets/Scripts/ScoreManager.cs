@@ -14,7 +14,7 @@ public class ScoreManager : MonoBehaviour
     void Update()
     {
         scoreText.text = score.ToString();
-        AddOnePoint();
+        
     }
 
     public void AddOnePoint()

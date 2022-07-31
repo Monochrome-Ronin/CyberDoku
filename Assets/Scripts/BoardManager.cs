@@ -8,18 +8,20 @@ public class BoardManager : MonoBehaviour
     private GameObject _Panel;
 
     [SerializeField]
-    Transform[,] MatrixGrid = new Transform[9,9];
+    Transform[,] MatrixGrid = new Transform[9, 9];
 
     [SerializeField]
     Transform[,,,] MatrixSquareGrid = new Transform[3, 3, 3, 3];
 
+    [SerializeField] private ScoreManager scoreManager;
+
     Quaternion _rotateTo;
     void Start()
     {
-       
+
         Transform[] GridElements = _Panel.transform.GetComponentsInChildren<Transform>();
         int count = 1;
-        for(int y = 0; y < 9; y++)
+        for (int y = 0; y < 9; y++)
         {
             for (int x = 0; x < 9; x++)
             {
@@ -49,7 +51,7 @@ public class BoardManager : MonoBehaviour
         RotateRow(CheckRows());
         RotateColumns(CheckColumns());
         RotateSquare(CheckSquare());
-      
+
     }
 
     int[] CheckRows()
@@ -65,7 +67,7 @@ public class BoardManager : MonoBehaviour
             OccupiedRows[y] = Occupied;
         }
         int count = 0;
-        for(int i = 0; i < 9; i++)
+        for (int i = 0; i < 9; i++)
         {
             if (OccupiedRows[i])
                 count++;
@@ -139,7 +141,7 @@ public class BoardManager : MonoBehaviour
                     count++;
             }
         }
-        
+
         Vector2[] result = new Vector2[count];
         for (int y = 0; y < 3; y++)
         {
@@ -157,9 +159,9 @@ public class BoardManager : MonoBehaviour
 
     void DeleteRows(int[] rows)
     {
-        for(int i = 0; i < rows.Length; i++)
+        for (int i = 0; i < rows.Length; i++)
         {
-            for(int x = 0; x < 9; x++)
+            for (int x = 0; x < 9; x++)
             {
                 Destroy(MatrixGrid[rows[i], x].GetComponent<Highlighter>().Cube);
                 MatrixGrid[rows[i], x].GetComponent<Highlighter>().Occupied = false;
@@ -170,19 +172,24 @@ public class BoardManager : MonoBehaviour
     }
     void RotateRow(int[] rows)
     {
-        _rotateTo = Quaternion.Euler(0,0,0);
-        for(int i = 0; i < rows.Length; i++)
+        _rotateTo = Quaternion.Euler(0, 0, 0);
+        for (int i = 0; i < rows.Length; i++)
         {
-            for(int x = 0; x < 9; x++)
+            for (int x = 0; x < 9; x++)
             {
                 MatrixGrid[rows[i], x].GetComponent<Highlighter>().Cube.transform.rotation = Quaternion.Slerp(MatrixGrid[rows[i], x].GetComponent<Highlighter>().Cube.transform.rotation, _rotateTo, Time.deltaTime * 3f);
-                Invoke("DesroyingRow", 1f);
+
             }
+            Invoke("DesroyingRow", 1f);
+            scoreManager.AddOnePoint();
+
         }
     }
-     void DesroyingRow(){
+    void DesroyingRow()
+    {
         DeleteRows(CheckRows());
-        
+       
+
     }
 
     void DeleteColumns(int[] columns)
@@ -200,17 +207,19 @@ public class BoardManager : MonoBehaviour
     }
     void RotateColumns(int[] columns)
     {
-        _rotateTo = Quaternion.Euler(0,0,0);
+        _rotateTo = Quaternion.Euler(0, 0, 0);
         for (int i = 0; i < columns.Length; i++)
         {
             for (int y = 0; y < 9; y++)
             {
                 MatrixGrid[y, columns[i]].GetComponent<Highlighter>().Cube.transform.rotation = Quaternion.Slerp(MatrixGrid[y, columns[i]].GetComponent<Highlighter>().Cube.transform.rotation, _rotateTo, Time.deltaTime * 3f);
-                Invoke("DesroyingColumn", 1f);
+
             }
-        }
+        } Invoke("DesroyingColumn", 1f);
+       
     }
-    void DesroyingColumn(){
+    void DesroyingColumn()
+    {
         DeleteColumns(CheckColumns());
     }
 
@@ -240,13 +249,14 @@ public class BoardManager : MonoBehaviour
                 for (int x = 0; x < 3; x++)
                 {
                     MatrixSquareGrid[(int)squares[i].x, (int)squares[i].y, y, x].GetComponent<Highlighter>().Cube.transform.rotation = Quaternion.Slerp(MatrixSquareGrid[(int)squares[i].x, (int)squares[i].y, y, x].GetComponent<Highlighter>().Cube.transform.rotation, _rotateTo, Time.deltaTime * 3f);
-                    Invoke("DesroyingSquare", 1f);
+
                 }
             }
-        }
+        }Invoke("DesroyingSquare", 1f);
+        
     }
 
-     void DesroyingSquare()
+    void DesroyingSquare()
     {
         DeleteSquares(CheckSquare());
     }
