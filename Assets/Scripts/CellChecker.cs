@@ -67,4 +67,26 @@ public class CellChecker : MonoBehaviour
     {
         CurrentCell.GetComponent<Highlighter>().Unhighlight();
     }
+
+    public void MakeEneble(bool eneble)
+    {
+        foreach (SpriteRenderer sprite in _transform.GetComponentsInChildren<SpriteRenderer>())
+        {
+            try
+            {
+                if (!eneble)
+                {
+                    sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 0.5f);
+                }
+                else
+                {
+                    sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 1f);
+                }
+            }
+            catch
+            {
+                continue;
+            }
+        }
+    }
 }
