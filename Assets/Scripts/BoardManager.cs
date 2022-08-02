@@ -1,13 +1,16 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class BoardManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject _Panel;
+    [SerializeField]
+    GameObject shape;
 
     [SerializeField]
-    Transform[,] MatrixGrid = new Transform[9,9];
+    static Transform[,] MatrixGrid = new Transform[9,9];
 
     [SerializeField]
     Transform[,,,] MatrixSquareGrid = new Transform[3, 3, 3, 3];
@@ -281,4 +284,78 @@ public class BoardManager : MonoBehaviour
         DeleteSquares(CheckSquare());
     }
 
+    public static bool IsSpaceToShape(GameObject shape)
+    {
+        float[] Rotations = new float[shape.transform.childCount - 1];
+        Vector2[] cubes = new Vector2[shape.transform.childCount - 1];
+        for(int i  = 1; i < shape.transform.childCount; i++)
+        {
+            cubes[i - 1] = new Vector2(shape.transform.GetChild(i).transform.localPosition.x, shape.transform.GetChild(i).transform.localPosition.y);
+            Rotations[i - 1] = shape.transform.GetChild(i).transform.rotation.eulerAngles.z;
+        }
+        for (int i = 0; i < cubes.Length; i++)
+        {
+            cubes[i].x = Round(cubes[i].x);
+            cubes[i].y = Round(cubes[i].y);
+        }
+        //rotate shapes in coordinates
+        for (int i = 0; i < cubes.Length; i++)
+        {
+            switch (Rotations[i])//bug
+            {
+                case 90:
+                    cubes[i] = new Vector2(-cubes[i].y, cubes[i].x);
+                    break;
+                case 180:
+                    cubes[i] = new Vector2(-cubes[i].x, -cubes[i].y);
+                    break;
+                case 270:
+                    cubes[i] = new Vector2(cubes[i].y, -cubes[i].x);
+                    break;
+                case -270:
+                    cubes[i] = new Vector2(-cubes[i].y, cubes[i].x);
+                    break;
+                case -180:
+                    cubes[i] = new Vector2(-cubes[i].x, -cubes[i].y);
+                    break;
+                case -90:
+                    cubes[i] = new Vector2(cubes[i].y, -cubes[i].x);
+                    break;
+            }
+        }
+        for (int y = 0; y < 9; y++)
+        {
+            for (int x = 0; x < 9; x++)
+            {
+                bool isSpace = true;
+                for (int i = 0; i < cubes.Length; i++)
+                {
+                    try
+                    {
+                        isSpace &= !MatrixGrid[y + (int)cubes[i].y, x + (int)cubes[i].x].GetComponent<Highlighter>().Occupied;//bug
+                    }
+                    catch
+                    {
+                        isSpace = false;
+                    }
+                }
+                if (isSpace)
+                {
+                    /*for (int i = 0; i < cubes.Length; i++)
+                    {
+                        //
+                        MatrixGrid[y + (int)cubes[i].y, x + (int)cubes[i].x].GetComponent<Highlighter>().Highlight();
+                        //
+                    }*/
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    static int Round(float f)
+    {
+        return (int)Math.Floor(f);
+    }
 }
