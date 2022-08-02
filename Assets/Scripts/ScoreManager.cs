@@ -26,5 +26,7 @@ public class ScoreManager : MonoBehaviour
     public void AddNinePoint()
     {
         score += 9;
+        hit.Play();
     }
+    //сделать топ скор и его сохранение
 }

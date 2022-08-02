@@ -19,6 +19,9 @@ public class BoardManager : MonoBehaviour
     private GameObject _laserGameObject;
     private bool fawfa = false;
 
+    [Header("Score")]
+    [SerializeField] ScoreManager _scoreManager;
+
     void Start()
     {
         Transform[] GridElements = _Panel.transform.GetComponentsInChildren<Transform>();
@@ -185,16 +188,18 @@ public class BoardManager : MonoBehaviour
             if(!fawfa){
                LaserHorizontal(MatrixGrid[rows[i],0].transform.position.y); 
             }
-            Invoke("DestroyingRow", 2f);
+            Invoke("DestroyingRow", 2f);          
         }
     }
 
     void LaserHorizontal(float y){
             _laserGameObject = Instantiate(_laserParticle, new Vector3(-6, y, 1 ), Quaternion.Euler(0,0,0));
             fawfa = true;
+        _scoreManager.AddNinePoint();
     }
     void DestroyingRow(){
         DeleteRows(CheckRows());
+        
     }
 
     void DeleteColumns(int[] columns)
@@ -232,6 +237,7 @@ public class BoardManager : MonoBehaviour
         
             _laserGameObject = Instantiate(_laserParticle, new Vector3(x, 5.5f, 1 ), Quaternion.Euler(0,0,-90));
             fawfa = true;
+        _scoreManager.AddNinePoint();
     }
 
     void DestroyingColumn(){
