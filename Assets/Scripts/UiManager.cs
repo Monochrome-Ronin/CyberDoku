@@ -18,6 +18,23 @@ public class UiManager : MonoBehaviour
     private bool isMuted;
     [SerializeField] private Toggle _musicToggle;
 
+    [Header("Top Score")]
+    [SerializeField] private Text _previousScore;
+    [SerializeField] private Text _bestScore;
+
+    private void Awake() {
+        if(PlayerPrefs.HasKey("Score")){
+            _previousScore.text = PlayerPrefs.GetInt("Score").ToString();
+        }else{
+            _previousScore.text = "0";
+        }
+        if(PlayerPrefs.HasKey("BestScore")){
+            _bestScore.text = PlayerPrefs.GetInt("BestScore").ToString();
+        }else{
+            _bestScore.text = "0";
+        }
+    }
+
     void Start()
     {
         _settingsButton.onClick.AddListener(openOrCloseMenu);
@@ -28,13 +45,11 @@ public class UiManager : MonoBehaviour
         _musicToggle.onValueChanged.AddListener(this.offOnMusic);
 
         if(!PlayerPrefs.HasKey("Muted")){
-            Debug.Log("Ключа нету");
             PlayerPrefs.SetInt("Muted", 1);
             isMuted = PlayerPrefs.GetInt("Muted") == 1;
             _audioSource.mute = isMuted;
             _musicToggle.isOn = isMuted;
         }else{
-            Debug.Log("Ключ есть " + PlayerPrefs.GetInt("Muted"));
             isMuted = PlayerPrefs.GetInt("Muted") == 1;
             _audioSource.mute = isMuted;
             _musicToggle.isOn = isMuted;
