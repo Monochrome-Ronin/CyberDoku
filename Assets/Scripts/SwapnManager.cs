@@ -1,14 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SwapnManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] shapes;
     [SerializeField] private GameObject[] spawnPositions;
 
-    GameObject[] SpawnedShapes = new GameObject[3];
 
+    [Header("Game Over")]
+    [SerializeField] private GameObject _gameOverPanel;
+    [SerializeField] private Text _currentScore;
+    [SerializeField] private Text _bestScore;
+
+    GameObject[] SpawnedShapes = new GameObject[3];
+    [Header("Shape Count")]
     public int shapeCount;
     void Start()
     {
@@ -61,7 +68,9 @@ public class SwapnManager : MonoBehaviour
         }
         if (gameOver && shapeCount > 0)
         {
-            Debug.Log("Game Over");
+            _currentScore.text = PlayerPrefs.GetInt("Score").ToString();
+            _bestScore.text = PlayerPrefs.GetInt("BestScore").ToString();
+            _gameOverPanel.SetActive(true);
         }
     }
 
