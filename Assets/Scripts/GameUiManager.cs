@@ -10,11 +10,20 @@ public class GameUiManager : MonoBehaviour
 
     [Header("Animators")]
     [SerializeField] private Animator _settingsAnimatorGame;
+
+    [Header("Game Over")]
+    [SerializeField] private Button _restartButton;
+    [SerializeField] private Button _backToMenuButton;
+
     
     void Start()
     {
         _settingsButtonGame.onClick.AddListener(openOrCloseMenuGame);
         _backButton.onClick.AddListener(backToMenu);
+
+        //Game Over buttons
+        _restartButton.onClick.AddListener(RestartGame);
+        _backToMenuButton.onClick.AddListener(BackToMenuGameOver);
     }
 
     private void openOrCloseMenuGame()
@@ -34,6 +43,12 @@ public class GameUiManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    private void RestartGame(){
+        SceneManager.LoadScene(1);
+    }
 
+    private void BackToMenuGameOver(){
+        SceneManager.LoadScene(0);
+    }
 
 }
