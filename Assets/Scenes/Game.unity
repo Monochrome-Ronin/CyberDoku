@@ -3374,6 +3374,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8709326471282213328, guid: 1a3f794557b7af946ad34c5392785206, type: 3}
   m_PrefabInstance: {fileID: 1174156341}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &601678154 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8777812932246152859, guid: 32337e931a029994185dbdb0b1c910cd, type: 3}
+  m_PrefabInstance: {fileID: 1610984385}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &617650772 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4428229055872938, guid: d6026771dddcb304a969aab68cb97a87, type: 3}
@@ -6107,7 +6118,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 3177f3f472b310d42bee07ecabb9f899, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
@@ -8173,13 +8184,25 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1610984388, guid: 32337e931a029994185dbdb0b1c910cd, type: 3}
+      propertyPath: moveShape
+      value: 
+      objectReference: {fileID: 1951862594}
+    - target: {fileID: 1610984388, guid: 32337e931a029994185dbdb0b1c910cd, type: 3}
       propertyPath: _audioSource
       value: 
       objectReference: {fileID: 1147552497}
     - target: {fileID: 1610984388, guid: 32337e931a029994185dbdb0b1c910cd, type: 3}
+      propertyPath: _soundToggle
+      value: 
+      objectReference: {fileID: 601678154}
+    - target: {fileID: 1610984388, guid: 32337e931a029994185dbdb0b1c910cd, type: 3}
       propertyPath: _volumeSlider
       value: 
       objectReference: {fileID: 1610984386}
+    - target: {fileID: 1610984388, guid: 32337e931a029994185dbdb0b1c910cd, type: 3}
+      propertyPath: _audioSourceClick
+      value: 
+      objectReference: {fileID: 1951862596}
     - target: {fileID: 2104679180, guid: 32337e931a029994185dbdb0b1c910cd, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -9971,7 +9994,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
