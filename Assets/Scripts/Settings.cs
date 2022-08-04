@@ -9,13 +9,19 @@ public class Settings : MonoBehaviour
     [SerializeField] private Dropdown _musicDropDown;
     [SerializeField] private Slider _volumeSlider;
     [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private AudioClip[] _audioClips;
-    // Start is called before the first frame update
+    [SerializeField] private AudioClip[] _audioClips; 
+    [SerializeField] private Toggle _soundToggle;
+
+    [SerializeField] private MoveShape moveShape;
+
     void Start()
     {
         _musicToggle.onValueChanged.AddListener(this.OffOnMusic);
+        _soundToggle.onValueChanged.AddListener(MuteSound);
         _musicDropDown.onValueChanged.AddListener(SwapMusic);
         _volumeSlider.onValueChanged.AddListener(VolumeChange);
+
+        
 
         if(!PlayerPrefs.HasKey("Muted")){
             PlayerPrefs.SetInt("Muted", 1);
@@ -52,8 +58,16 @@ public class Settings : MonoBehaviour
     {
         isMuted = isOn;
         _audioSource.mute = isMuted;
+        PlayerPrefs.SetInt("Muted", isMuted ? 1 : 0);       
+    }
+
+    private void MuteSound(bool muteSound)
+    {
+        isMuted = muteSound;
+        moveShape._audioSourceClick.mute = isMuted;
         PlayerPrefs.SetInt("Muted", isMuted ? 1 : 0);
     }
+
 
     private void SwapMusic(int musicIndex){
         if(_musicDropDown.value == 0) musicIndex = 0;

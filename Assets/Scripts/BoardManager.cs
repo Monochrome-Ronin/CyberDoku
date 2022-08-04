@@ -25,6 +25,7 @@ public class BoardManager : MonoBehaviour
     [Header("Score")]
     [SerializeField] ScoreManager _scoreManager;
 
+    
     void Start()
     {
         Transform[] GridElements = _Panel.transform.GetComponentsInChildren<Transform>();
@@ -278,6 +279,8 @@ public class BoardManager : MonoBehaviour
             }
         }
     }
+
+
 
     void DesroyingSquare()
     {
