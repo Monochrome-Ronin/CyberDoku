@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MoveShape : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class MoveShape : MonoBehaviour
     BoxCollider2D _SellCollider;
     [SerializeField]
     SwapnManager _SwapnManager;
+    [SerializeField]
+    Image _GridElement;
+    [SerializeField]
+    Camera _Camera;
 
     RaycastHit2D CurrentHit;
     bool Clicked = false;
@@ -75,7 +80,8 @@ public class MoveShape : MonoBehaviour
 
     void __ChangeScale(RaycastHit2D hit)
     {
-        hit.transform.parent.transform.localScale = new Vector3(.61f, .61f, 1);
+        float scale = _Camera.aspect / 0.5625f;
+        hit.transform.parent.transform.localScale = new Vector3(.61f * scale, .61f * scale, 1);
     }
 
     void __ReturnScale(RaycastHit2D hit)
