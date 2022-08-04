@@ -9,7 +9,8 @@ public class CellChecker : MonoBehaviour
     GameObject CurrentCell;
 
     public bool Placed = false;
-    
+    public bool Eneble = true;
+
     void Start()
     {
         _transform = GetComponent<Transform>();
@@ -40,6 +41,7 @@ public class CellChecker : MonoBehaviour
             CurrentCell.GetComponent<Highlighter>().Unhighlight();
             CurrentCell = null;
         }
+        MakeEneble(Eneble);
     }
 
     public void FixToCell()

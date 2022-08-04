@@ -280,43 +280,25 @@ public class BoardManager : MonoBehaviour
 
     public static bool IsSpaceToShape(GameObject shape)
     {
-        float[] Rotations = new float[shape.transform.childCount - 1];
         Vector2[] cubes = new Vector2[shape.transform.childCount - 1];
-        for(int i  = 1; i < shape.transform.childCount; i++)
+        //get position of cubes due to local position
+        for (int i = 1; i < shape.transform.childCount; i++)
         {
-            cubes[i - 1] = new Vector2(shape.transform.GetChild(i).transform.localPosition.x, shape.transform.GetChild(i).transform.localPosition.y);
-            Rotations[i - 1] = shape.transform.GetChild(i).transform.rotation.eulerAngles.z;
+            cubes[i - 1] = shape.transform.TransformPoint(shape.transform.GetChild(i).transform.localPosition);
+            
         }
-        for (int i = 0; i < cubes.Length; i++)
+        //scele cubes to 1
+        for (int i = 1; i < shape.transform.childCount; i++)
         {
-            cubes[i].x = Round(cubes[i].x);
-            cubes[i].y = Round(cubes[i].y);
+            cubes[i - 1] *= new Vector2(2.5f, 2.5f);
         }
-        //rotate shapes in coordinates
-        for (int i = 0; i < cubes.Length; i++)
+        //convert positions to normal vector
+        Vector2 offset = cubes[0];
+        for (int i = 1; i < shape.transform.childCount; i++)
         {
-            switch (Rotations[i])//bug
-            {
-                case 90:
-                    cubes[i] = new Vector2(-cubes[i].y, cubes[i].x);
-                    break;
-                case 180:
-                    cubes[i] = new Vector2(-cubes[i].x, -cubes[i].y);
-                    break;
-                case 270:
-                    cubes[i] = new Vector2(cubes[i].y, -cubes[i].x);
-                    break;
-                case -270:
-                    cubes[i] = new Vector2(-cubes[i].y, cubes[i].x);
-                    break;
-                case -180:
-                    cubes[i] = new Vector2(-cubes[i].x, -cubes[i].y);
-                    break;
-                case -90:
-                    cubes[i] = new Vector2(cubes[i].y, -cubes[i].x);
-                    break;
-            }
+            cubes[i - 1] -= offset;
         }
+        //matrix search for free space
         for (int y = 0; y < 9; y++)
         {
             for (int x = 0; x < 9; x++)
@@ -326,7 +308,7 @@ public class BoardManager : MonoBehaviour
                 {
                     try
                     {
-                        isSpace &= !MatrixGrid[y + (int)cubes[i].y, x + (int)cubes[i].x].GetComponent<Highlighter>().Occupied;//bug
+                        isSpace &= !MatrixGrid[y - (int)cubes[i].y, x + (int)cubes[i].x].GetComponent<Highlighter>().Occupied;
                     }
                     catch
                     {
@@ -335,12 +317,6 @@ public class BoardManager : MonoBehaviour
                 }
                 if (isSpace)
                 {
-                    /*for (int i = 0; i < cubes.Length; i++)
-                    {
-                        //
-                        MatrixGrid[y + (int)cubes[i].y, x + (int)cubes[i].x].GetComponent<Highlighter>().Highlight();
-                        //
-                    }*/
                     return true;
                 }
             }
@@ -348,8 +324,4 @@ public class BoardManager : MonoBehaviour
         return false;
     }
 
-    static int Round(float f)
-    {
-        return (int)Math.Floor(f);
-    }
 }

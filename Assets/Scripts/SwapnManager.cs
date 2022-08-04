@@ -25,7 +25,9 @@ public class SwapnManager : MonoBehaviour
         for(int spawnIndex = 0; spawnIndex < 3; spawnIndex++)
         {
             var obj = shapes[Random.Range(0, shapes.Length)];
-            SpawnedShapes[spawnIndex] = Instantiate(obj, spawnPositions[spawnIndex].transform.position + obj.transform.GetChild(0).position, Quaternion.Euler(0, 0, 90 * Random.Range(1, 4)));
+            SpawnedShapes[spawnIndex] = Instantiate(obj, spawnPositions[spawnIndex].transform.position + obj.transform.GetChild(0).position, Quaternion.identity);
+            SpawnedShapes[spawnIndex].transform.Rotate(0, 0, 90* Random.Range(1, 4), Space.Self);
+            //Debug.Log(SpawnedShapes[spawnIndex].transform.rotation.eulerAngles.z);
         }
 
         shapeCount = 3;
@@ -49,6 +51,10 @@ public class SwapnManager : MonoBehaviour
                             EnebleShape(shape, false);
                             
                         }
+                        else
+                        {
+                            EnebleShape(shape, true);
+                        }
                     }
                 }
             }
@@ -65,8 +71,8 @@ public class SwapnManager : MonoBehaviour
         {
             try
             {
-                child.gameObject.GetComponent<BoxCollider2D>().enabled = eneble;
-                child.gameObject.GetComponent<CellChecker>().MakeEneble(eneble);
+                child.gameObject.GetComponent<CellChecker>().Eneble = eneble;
+                //child.gameObject.GetComponent<CellChecker>().MakeEneble(eneble);
             }
             catch
             {

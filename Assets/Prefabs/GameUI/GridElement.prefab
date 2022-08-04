@@ -118,3 +118,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Highlighted: {fileID: 2100000, guid: bbd17fabff3791c438ad14b791b40b4a, type: 2}
   _Unhighlighted: {fileID: 2100000, guid: 4c398844e37f09b4b9ae47ae26853ba1, type: 2}
+  _Testhighlighted: {fileID: 2100000, guid: 7e6fe6b75e3dead4c8efde0e13c6a4c7, type: 2}
+  Occupied: 0
+  Cube: {fileID: 0}
