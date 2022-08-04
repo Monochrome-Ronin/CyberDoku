@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="cf771d86-be7b-4354-853e-ea55b3003e47" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Prefabs/TutorialPanel.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Prefabs/TutorialPanel.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Sprites/Tutorial.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Sprites/Tutorial/Line.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Sprites/Tutorial/Line.jpg.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Sprites/Tutorial/Square.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Sprites/Tutorial/Square.jpg.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Sprites/Tutorial/TutorialBackground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Sprites/Tutorial/TutorialBackground.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Prefabs/Settings.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../Prefabs/Settings.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Scenes/Game.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scenes/Menu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Scenes/Menu.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BoardManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BoardManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameUiManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameUiManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MoveShape.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MoveShape.cs" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/MoveShape.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectId" id="2Ca8ElZpA5PRNzAaEBKYNWRVVeS" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cf771d86-be7b-4354-853e-ea55b3003e47" name="Changes" comment="" />
+      <created>1659029357620</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1659029357620</updated>
+      <workItem from="1659029357622" duration="67000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>

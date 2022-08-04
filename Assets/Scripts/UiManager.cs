@@ -13,11 +13,47 @@ public class UiManager : MonoBehaviour
     [SerializeField] private Animator _settingsAnimator;
     [SerializeField] private Animator _topScoreAnimator;
 
+    [Header("Music")]
+    private AudioSource _audioSource;
+    private bool isMuted;
+    [SerializeField] private Toggle _musicToggle;
+
+    [Header("Top Score")]
+    [SerializeField] private Text _previousScore;
+    [SerializeField] private Text _bestScore;
+
+    private void Awake() {
+        if(PlayerPrefs.HasKey("Score")){
+            _previousScore.text = PlayerPrefs.GetInt("Score").ToString();
+        }else{
+            _previousScore.text = "0";
+        }
+        if(PlayerPrefs.HasKey("BestScore")){
+            _bestScore.text = PlayerPrefs.GetInt("BestScore").ToString();
+        }else{
+            _bestScore.text = "0";
+        }
+    }
+
     void Start()
     {
         _settingsButton.onClick.AddListener(openOrCloseMenu);
         _topScoreButton.onClick.AddListener(openOrCloseScore);
         _startButton.onClick.AddListener(startGame);
+
+        _audioSource = gameObject.GetComponent<AudioSource>();
+        _musicToggle.onValueChanged.AddListener(this.offOnMusic);
+
+        if(!PlayerPrefs.HasKey("Muted")){
+            PlayerPrefs.SetInt("Muted", 1);
+            isMuted = PlayerPrefs.GetInt("Muted") == 1;
+            _audioSource.mute = isMuted;
+            _musicToggle.isOn = isMuted;
+        }else{
+            isMuted = PlayerPrefs.GetInt("Muted") == 1;
+            _audioSource.mute = isMuted;
+            _musicToggle.isOn = isMuted;
+        }
     }
 
     private void openOrCloseScore()
@@ -41,6 +77,15 @@ public class UiManager : MonoBehaviour
         {
             _settingsAnimator.SetBool("isOpen", false);
         }
+    }
+
+    public void offOnMusic(bool isOn)
+    {
+        isMuted = isOn;
+        _audioSource.mute = isMuted;
+        PlayerPrefs.SetInt("Muted", isMuted ? 1 : 0);
+        
+        
     }
 
     private void startGame()

@@ -19,9 +19,12 @@ public class MoveShape : MonoBehaviour
     readonly float LerpSpeed = 20f;
     float t = 0;
 
+    [SerializeField] private AudioClip[] audioClips;
+    private AudioSource _audioSource;
+
     void Start()
     {
-        
+        _audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     void Update()
@@ -35,7 +38,7 @@ public class MoveShape : MonoBehaviour
             {
                 if (hit.transform.tag == "shape")
                 {
-                    //
+                    _audioSource.PlayOneShot(audioClips[0]);
                     startShapePosition = hit.transform.parent.transform.position;
                     __ChangeScale(hit);
                     offset = hit.transform.parent.transform.position - mousePosition;
@@ -57,7 +60,7 @@ public class MoveShape : MonoBehaviour
             Clicked = false;
             if(CurrentHit.collider != null)
             {
-                //
+                _audioSource.PlayOneShot(audioClips[1]);
                 FixCubes(CurrentHit);
                 if(!IsPlaced(CurrentHit))
                 {
