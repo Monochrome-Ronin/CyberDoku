@@ -266,6 +266,7 @@ public class BoardManager : MonoBehaviour
                     MatrixSquareGrid[(int)squares[i].x, (int)squares[i].y, y, x].GetComponent<Highlighter>().Unhighlight();
                 }
             }
+            _scoreManager.AddNinePoint();
         }
     }
     void RotateSquare(Vector2[] squares)
