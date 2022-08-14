@@ -8,6 +8,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] private Button _startButton;
     [SerializeField] private Button _settingsButton;
     [SerializeField] private Button _topScoreButton;
+    [SerializeField] private Button _exitButton;
 
     [Header("Animators")]
     [SerializeField] private Animator _settingsAnimator;
@@ -40,6 +41,7 @@ public class UiManager : MonoBehaviour
         _settingsButton.onClick.AddListener(openOrCloseMenu);
         _topScoreButton.onClick.AddListener(openOrCloseScore);
         _startButton.onClick.AddListener(startGame);
+        _exitButton.onClick.AddListener(exitGame);
 
         _audioSource = gameObject.GetComponent<AudioSource>();
         _musicToggle.onValueChanged.AddListener(this.offOnMusic);
@@ -93,6 +95,10 @@ public class UiManager : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    private void exitGame()
+    {
+        Application.Quit();
+    }
 
 
 }
