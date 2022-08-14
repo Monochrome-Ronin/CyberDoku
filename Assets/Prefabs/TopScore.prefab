@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 119628482}
   - component: {fileID: 119628484}
   - component: {fileID: 119628483}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Text (Legacy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 1150761637}
   - component: {fileID: 1150761639}
   - component: {fileID: 1150761638}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 1293246242}
   - component: {fileID: 1293246244}
   - component: {fileID: 1293246243}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Text (Legacy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 1431377277}
   - component: {fileID: 1431377279}
   - component: {fileID: 1431377278}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Text (Legacy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 1515044400}
   - component: {fileID: 1515044402}
   - component: {fileID: 1515044401}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Text (Legacy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -412,7 +412,7 @@ GameObject:
   - component: {fileID: 1518761497}
   - component: {fileID: 1518761499}
   - component: {fileID: 1518761498}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: BestScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -462,7 +462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -490,7 +490,7 @@ GameObject:
   - component: {fileID: 1594764305}
   - component: {fileID: 1594764307}
   - component: {fileID: 1594764306}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: PreviousScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -540,7 +540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -568,7 +568,7 @@ GameObject:
   - component: {fileID: 2057185948}
   - component: {fileID: 2057185950}
   - component: {fileID: 2057185949}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -697,7 +697,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

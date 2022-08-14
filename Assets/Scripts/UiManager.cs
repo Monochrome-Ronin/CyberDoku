@@ -100,5 +100,14 @@ public class UiManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void closeSettings()
+    {
+        _settingsAnimator.SetBool("isOpen", false);
+    }
+
+    public void closeTopScore()
+    {
+        _topScoreAnimator.SetBool("isOpen", false);
+    }
 
 }
