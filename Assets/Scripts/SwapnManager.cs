@@ -66,7 +66,7 @@ public class SwapnManager : MonoBehaviour
                 }
             }
         }
-        if (gameOver && shapeCount > 0)
+        if (gameOver && shapeCount > 0 && BoardManager.CheckAction())
         {
             _currentScore.text = PlayerPrefs.GetInt("Score").ToString();
             _bestScore.text = PlayerPrefs.GetInt("BestScore").ToString();

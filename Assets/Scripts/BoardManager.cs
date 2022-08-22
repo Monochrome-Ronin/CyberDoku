@@ -23,10 +23,16 @@ public class BoardManager : MonoBehaviour
     [Header("Score")]
     [SerializeField] ScoreManager _scoreManager;
 
-    bool[] LazerPlayedRows = new bool[9];
+    static bool[] LazerPlayedRows = new bool[9];
     GameObject[] _laserGameObjectRows = new GameObject[9];
-    bool[] LazerPlayedColumns = new bool[9];
+    static bool[] LazerPlayedColumns = new bool[9];
     GameObject[] _laserGameObjectColumns = new GameObject[9];
+    static bool[,] LazerPlayedSquares = new bool[3,3];
+    GameObject[,] _laserGameObjectSquares = new GameObject[3,3];
+    static int[] CurrentRows;
+    static int[] CurrentColumns;
+    static Vector2[] CurrentSquares;
+
 
     void Start()
     {
@@ -59,9 +65,12 @@ public class BoardManager : MonoBehaviour
 
     void Update()
     {
-        RotateRow(CheckRows());
-        RotateColumns(CheckColumns());
-        RotateSquare(CheckSquare());
+        CurrentRows = CheckRows();
+        CurrentColumns = CheckColumns();
+        CurrentSquares = CheckSquare();
+        RotateRow(CurrentRows);
+        RotateColumns(CurrentColumns);
+        RotateSquare(CurrentSquares);
     }
 
     int[] CheckRows()
@@ -196,7 +205,7 @@ public class BoardManager : MonoBehaviour
                 _laserGameObjectRows[rows[i]] = LaserHorizontal(MatrixGrid[rows[i], 0].transform.position.y);
                 LazerPlayedRows[rows[i]] = true;
             }
-            Invoke("DestroyingRow", 2f);          
+            Invoke("DestroyingRow", 1f);          
         }
     }
 
@@ -205,8 +214,8 @@ public class BoardManager : MonoBehaviour
         return Instantiate(_laserParticle, new Vector3(-6, y, 1), Quaternion.Euler(0, 0, 0));
     }
     void DestroyingRow(){
-        DeleteRows(CheckRows());
-        
+        DeleteRows(CurrentRows);
+        //CurrentRows = null;
     }
 
     void DeleteColumns(int[] columns)
@@ -238,7 +247,7 @@ public class BoardManager : MonoBehaviour
                 _laserGameObjectColumns[columns[i]] = LaserVertical(MatrixGrid[0, columns[i]].transform.position.x);
                 LazerPlayedColumns[columns[i]] = true;
             }
-            Invoke("DestroyingColumn", 2f);
+            Invoke("DestroyingColumn", 1f);
         }
     }
 
@@ -249,7 +258,8 @@ public class BoardManager : MonoBehaviour
     }
 
     void DestroyingColumn(){
-        DeleteColumns(CheckColumns());
+        DeleteColumns(CurrentColumns);
+        //CurrentColumns = null;
     }
 
     void DeleteSquares(Vector2[] squares)
@@ -266,7 +276,8 @@ public class BoardManager : MonoBehaviour
                     MatrixSquareGrid[(int)squares[i].x, (int)squares[i].y, y, x].GetComponent<Highlighter>().Unhighlight();
                 }
             }
-            _scoreManager.AddNinePoint();
+            LazerPlayedSquares[(int)squares[i].x, (int)squares[i].y] = false;
+            Destroy(_laserGameObjectSquares[(int)squares[i].x, (int)squares[i].y]);
         }
     }
     void RotateSquare(Vector2[] squares)
@@ -279,15 +290,28 @@ public class BoardManager : MonoBehaviour
                 for (int x = 0; x < 3; x++)
                 {
                     MatrixSquareGrid[(int)squares[i].x, (int)squares[i].y, y, x].GetComponent<Highlighter>().Cube.transform.rotation = Quaternion.Slerp(MatrixSquareGrid[(int)squares[i].x, (int)squares[i].y, y, x].GetComponent<Highlighter>().Cube.transform.rotation, _rotateTo, Time.deltaTime * 3f);
-                    Invoke("DesroyingSquare", 1f);
                 }
+                
             }
+            if (!LazerPlayedSquares[(int)squares[i].x, (int)squares[i].y])
+            {
+                _laserGameObjectSquares[(int)squares[i].x, (int)squares[i].y] = LaserSquare();
+                LazerPlayedSquares[(int)squares[i].x, (int)squares[i].y] = true;
+            }
+            Invoke("DesroyingSquare", 1f);
         }
+    }
+
+    GameObject LaserSquare()
+    {
+        _scoreManager.AddNinePoint();
+        return new GameObject();
     }
 
     void DesroyingSquare()
     {
-        DeleteSquares(CheckSquare());
+        DeleteSquares(CurrentSquares);
+        //CurrentSquares = null;
     }
 
     public static bool IsSpaceToShape(GameObject shape)
@@ -334,6 +358,31 @@ public class BoardManager : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public static bool CheckAction()
+    {
+        bool rows = true;
+        bool columns = true;
+        bool squares = true;
+        foreach(bool lazer in LazerPlayedRows)
+        {
+            rows &= !lazer;
+        }
+        foreach (bool lazer in LazerPlayedColumns)
+        {
+            columns &= !lazer;
+        }
+        for(int x = 0; x < 3; x++)
+        {
+            for (int y = 0; y < 3; y++)
+            {
+                columns &= !LazerPlayedSquares[x, y];
+            }
+        }
+        if (rows && columns && squares)
+            return true;
+        else return false;
     }
 
 }
